@@ -1,0 +1,34 @@
+/**
+ * k+1个连续得数如果存在相同的数，则返回true
+ * 
+ */
+public class Solution {
+    public boolean containsNearbyDuplicate(int[] nums, int k) {
+        if(nums==null || nums.length==0){
+            return false;
+        }
+        Set<Integer> set=new HashSet<Integer>();
+        int n=nums.length;
+        k=n-1>k?k:n-1;
+        
+        int i=0,j=0;
+        while(j<k+1){
+            if(set.contains(nums[j])){
+                return true;
+            }
+            set.add(nums[j]);
+            j++;
+        }
+        
+        while(j<n){
+            set.remove(nums[i]);
+            if(set.contains(nums[j])){
+                return true;
+            }
+            set.add(nums[j]);
+            i++;
+            j++;
+        }
+        return false;
+    }
+}
