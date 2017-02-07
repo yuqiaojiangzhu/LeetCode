@@ -24,3 +24,26 @@ public class Solution {
         return -1;
     }
 }
+
+/*解法二：时间复杂度为O(n)，空间复杂度为O(1）,
+public class Solution {
+    public int majorityElement(int[] num) {
+
+        int major=num[0], count = 1;
+        for(int i=1; i<num.length;i++){
+            if(count==0){
+                count++;
+                major=num[i];
+            }else if(major==num[i]){
+                count++;
+            }else count--;
+            
+        }
+        return major;
+    }
+}
+
+
+
+
+*/
