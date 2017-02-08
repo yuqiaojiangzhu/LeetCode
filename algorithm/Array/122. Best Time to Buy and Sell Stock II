@@ -1,0 +1,61 @@
+/*
+Say you have an array for which the ith element is the price of a given stock on day i.
+
+Design an algorithm to find the maximum profit. You may complete as many transactions as you like (ie, buy one and sell one share of the stock multiple times). However, you may not engage in multiple transactions at the same time (ie, you must sell the stock before you buy again).
+我的解法及其复杂。。。
+*/
+
+public class Solution {
+    public int maxProfit(int[] prices) {
+        if(prices==null || prices.length<2){
+            return 0;
+        }
+        int n=prices.length;
+  /*      boolean up=false; //表示涨或跌，为true则为涨
+        int profit=0;
+        
+        if(prices[0]<prices[1]){
+            up=true;
+            profit=-prices[0];
+        }
+        
+        for(int i=1;i<n-1;i++){
+            if(up){
+                if(prices[i]>prices[i+1])
+            }
+        }*/
+        
+        int profit=0;
+        int i=0;
+        boolean up;
+        
+        while(i<n-1 && prices[i]>prices[i+1]){
+            i++;
+        }
+        
+        if(i==n-1){
+            return 0;
+        }
+        
+        
+        profit=-prices[i];
+        up=true;
+        
+        while(i<n-1){
+            if(up && prices[i]>prices[i+1]){
+                profit+=prices[i];
+                up=false;
+            }else if(!up && prices[i]<prices[i+1]){
+                profit-=prices[i];
+                up=true;
+            }
+            i++;
+        }
+        
+        if(up){
+            profit+=prices[i];
+        }
+        
+        return profit;
+    }
+}
