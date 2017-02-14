@@ -1,0 +1,25 @@
+/**
+ * 给定一个非负整数，转换为数组，求其加1后结果，也以整数表示
+ * 例如：33322232 转换为{3,3,3,2,2,2,3,2}
+ * 
+ * 
+ */
+public class Solution {
+    public int[] plusOne(int[] digits) {
+        if(digits==null || digits.length==0){
+            return null;
+        }
+        int n=digits.length;
+        
+        for(int i=n-1;i>=0;i--){
+            if(digits[i]<9){
+                digits[i]++;
+                return digits;
+            }
+            digits[i]=0;
+        }
+        int[] digits2=new int[n+1];
+        digits2[0]=1;
+        return digits2;
+    }
+}
