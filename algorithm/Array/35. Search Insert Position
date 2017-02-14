@@ -1,0 +1,30 @@
+/**
+ * 35. Search Insert Position
+ * Given a sorted array and a target value, return the index if the target is found. 
+ * If not, return the index where it would be if it were inserted in order.
+ * You may assume no duplicates in the array.
+ * 关键点在于最后插入点判断，其实就是最后不符合要求的右边点
+ */
+public class Solution {
+    public int searchInsert(int[] nums, int target) {
+        if(nums==null || nums.length==0){
+            return 0;
+        }
+        int n=nums.length;
+        return binarySearch(nums,0,n-1,target);
+    }
+    
+    public int binarySearch(int[] nums,int l,int r,int target){
+        if(l>r){
+            return l;
+        }
+        int m=l+(r-l)/2;
+        if(target == nums[m]){
+            return m;
+        }else if(target > nums[m]){
+            return binarySearch(nums,m+1,r,target);
+        }else{
+            return binarySearch(nums,l,m-1,target);
+        }
+    }
+}
