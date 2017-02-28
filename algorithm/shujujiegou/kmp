@@ -1,0 +1,47 @@
+/*未测试代码*/
+public class KMPTest{
+ 
+ 
+ public static int [] geNext(char[] T){
+  int len=T.length;
+  int[] next=new int[len];
+  int j=-1,i=0;  //j就是相等前缀后一位，i是后缀后一位,后来比较时候，如果i不匹配，就把i点位置改为j点
+  next[0]=-1;
+  
+  while(i<len-1){   
+    if(j==-1 || T[i]==T[j]){    //j==-1代表没有和该数匹配的前缀，所以，匹配算法匹配的时候，该值就走0步，直接和T[0]比较
+      j++;
+      i++;
+      next[i]=j;
+    }else{
+      j=next[j];
+    }
+  }
+  
+  return next;
+}
+
+public static int kmpIndex(char[] S,char[] T){
+  int[] next=getNext(T);
+  int lenT=T.length;
+  int lenS=S.length;
+  
+  int i=0,j=0;
+  while(i<lenT && j<lenS){
+    if(i==-1 || T[i]==S[j]){
+      i++;
+      j++;
+    }else{
+      i=next[i];
+    }
+  }
+  
+  if(i==lenT){
+    return j=lenT;
+  }else{
+    return -1;
+  }
+  
+}
+
+}
