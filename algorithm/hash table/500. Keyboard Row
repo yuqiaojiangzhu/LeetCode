@@ -1,1 +1,38 @@
 
+public class Solution {
+    public String[] findWords(String[] words) {
+        if(words==null || words.length==0){
+            return new String[0];
+        }
+        
+        HashMap<Character,Integer> map=new HashMap<Character,Integer>();
+        String[] zifu={"QWERTYUIOP","ASDFGHJKL","ZXCVBNM"};
+        for(int i=0;i<zifu.length;i++){
+            for(char c:zifu[i].toCharArray()){
+                map.put(c,i);
+            }
+        }
+        
+        List<String> list=new LinkedList<String>();
+        for(int i=0;i<words.length;i++){
+            if(words[i]==null || "".equals(words[i])){
+                continue;
+            }
+            
+            int num=map.get(words[i].toUpperCase().charAt(0));
+            for(char c:words[i].toUpperCase().toCharArray()){
+                if(num!=map.get(c)){
+                    num=-1;
+                    break;
+                }
+            }
+            if(num==-1){
+                continue;
+            }
+            list.add(words[i]);
+        }
+        
+     
+        return list.toArray(new String[0]);
+    }
+}
