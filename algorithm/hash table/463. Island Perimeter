@@ -1,0 +1,55 @@
+public class Solution {
+    public int islandPerimeter(int[][] grid) {
+        if(grid==null || grid.length==0){
+            return 0;
+        }
+        
+        int island_num=0;
+        int dou_edge=0;
+        int hen_len=grid.length;
+        int col_len=grid[0].length;
+        
+        for(int i=0;i<hen_len;i++){
+            int tem=0;
+            int edge=0;
+            for(int j=0;j<col_len;j++){
+                
+                if(grid[i][j]==1){
+                    tem++;
+                }
+                if(grid[i][j]==1 && j<col_len-1 && grid[i][j+1]==1){
+                    edge++;
+                }
+
+            }
+           
+            island_num+=tem;
+            dou_edge+=edge;
+            
+        }
+        
+        for(int j=0;j<col_len;j++){
+            //int tem=0;
+            int edge=0;
+            for(int i=0;i<hen_len;i++){
+                
+                /*if(grid[i][j]==1){
+                    tem++;
+                }*/
+                
+                if(grid[i][j]==1 && i<hen_len-1 && grid[i+1][j]==1){
+                    edge++;
+                }
+
+            }
+             
+            dou_edge+=edge;
+            
+        }
+        
+        int num=island_num * 4 - dou_edge * 2;
+        return num;
+        
+        
+    }
+}
