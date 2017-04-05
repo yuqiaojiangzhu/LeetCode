@@ -1,0 +1,48 @@
+//这道题的意思就是给两个字符串，看p的顺序打乱后的所有可能的字符串在s中能不能找到，找得到就把所有找到的开始的位置记录下来。
+//这个大概的思路要用到两个标记，去一点点比对p的重组字有没有可能找到，找不找得到这一点，不可能把p的所有可能的重组字先列出来，就只能一个字母一个字母地判断，
+//用滑窗解法。
+
+public class Solution {
+    public List<Integer> findAnagrams(String s, String p) {
+        if(s==null || p==null || "".equals(s) || "".equals(p)){
+            return new ArrayList<Integer>();
+        }
+        List<Integer> list=new ArrayList<Integer>();
+        HashMap<Character,Integer> hash=new HashMap<Character,Integer>();
+        for(char c : p.toCharArray()){
+            hash.put(c,hash.containsKey(c)?hash.get(c)+1:1);
+        }
+        //HashMap<Character,Integer> hash
+        
+        int left=0,right=0,count=0,plen=p.length();
+        
+        while(right<s.length()){
+            if(!hash.containsKey(s.charAt(right))){
+                while(left<right){
+                    hash.put(s.charAt(left),hash.get(s.charAt(left))+1);
+                    left++;
+                }
+                left=++right;
+                continue;
+            }
+            
+            if(hash.get(s.charAt(right))==0){
+                hash.put(s.charAt(left),hash.get(s.charAt(left))+1);
+                left++;
+                continue;
+            }
+            
+            
+            
+            if(right-left == plen-1){
+                //count++;
+                list.add(left);
+            }
+            
+            hash.put(s.charAt(right),hash.get(s.charAt(right))-1);;
+            
+            right++;
+        }
+        return list;
+    }
+}
