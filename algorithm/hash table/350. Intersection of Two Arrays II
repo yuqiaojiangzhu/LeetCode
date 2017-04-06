@@ -1,0 +1,63 @@
+public class Solution {
+    public int[] intersect(int[] nums1, int[] nums2) {
+        if(nums1==null || nums2==null || nums1.length==0 || nums2.length==0){
+            return new int[0];
+        }
+        
+        kuaisuSort(nums1,0,nums1.length-1);
+        kuaisuSort(nums2,0,nums2.length-1);
+        
+        int len1=nums1.length;
+        int len2=nums2.length; 
+        int i=0,j=0;
+        
+        List<Integer> list=new ArrayList<Integer>();
+        while(i<len1 && j<len2){
+            if(nums1[i]==nums2[j]){
+                list.add(nums1[i]);
+                i++;
+                j++;
+            }else if(nums1[i]<nums2[j]){
+                i++;
+            }else{
+                j++;
+            }
+        }
+        
+        int[] res=new int[list.size()];
+        
+        int z=0;
+        for(int n : list){
+            res[z]=n;
+            z++;
+        }
+        
+        return res;
+    }
+    
+    public void kuaisuSort(int[] num,int i,int j){
+        if(i>=j){
+            return;
+        }
+        
+        int temp=num[i];
+        
+        int left=i,right=j;
+        
+        while(i<j){
+            while(i<j && num[j]>=temp){
+                j--;
+            }
+            num[i]=num[j];
+            num[j]=temp;
+            while(i<j && num[i]<=temp){
+                i++;
+            }
+            num[j]=num[i];
+            num[i]=temp;
+        }
+        
+        kuaisuSort(num,left,i-1);
+        kuaisuSort(num,i+1,right);
+    }
+}
