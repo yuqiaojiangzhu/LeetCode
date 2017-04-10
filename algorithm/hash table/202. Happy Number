@@ -1,0 +1,24 @@
+public class Solution {
+    public boolean isHappy(int n) {
+        int n_one=n,n_two=n;
+        while(n_two!=1){
+
+            n_one=happy(n_one);
+            n_two=happy(happy(n_two));
+            
+            if(n_one==n_two && n_one!=1){
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    public int happy(int n){
+        int num=0;
+        while(n!=0){
+            num+=Math.pow(n%10,2);
+            n/=10;
+        }
+        return num;
+    }
+}
