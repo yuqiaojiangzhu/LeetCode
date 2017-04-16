@@ -1,0 +1,40 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public boolean isPalindrome(ListNode head) {
+       if(head==null || head.next==null){
+           return true;
+       }
+       
+       ListNode pl=head,pr=head,pre=head,pend=head;   //pl是一半速度往前推进，pre是p1前面位置的地址，pr是pl后面一个元素地址,pend是结束元素或者结束前元素地址，以两倍速度向前推进
+       pr=pr.next;
+       
+       while(pend.next!=null && pend.next.next!=null){
+           pend=pend.next.next;
+           pre=pl;
+           pl=pr;
+           pr=pr.next;
+           pl.next=pre;
+       }
+       
+       if(pend.next==null){ //说明pend跑到最后在倒数第一个点上，也表明list.size()为奇数，这个时候pl就处于正终点，得向前提一位
+           pl=pl.next;
+       }
+       
+       //这个时候。pl是前半段起点指针，pr是后半段起点指针，都处于中点两边，而且指向相反
+       while(pr!=null){
+           if(pr.val!=pl.val){
+               return false;
+           }
+           pr=pr.next;
+           pl=pl.next;
+       }
+       return true;
+    }
+}
