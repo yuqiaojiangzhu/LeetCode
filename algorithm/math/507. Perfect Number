@@ -1,0 +1,17 @@
+public class Solution {
+    public boolean checkPerfectNumber(int num) {
+        if(num<6){
+            return false;
+        }
+        int sum=0,val=num;
+        for(int i=1;i<val;i++){
+            if((num%i)==0){
+                val=num/i;
+                sum=sum+val+i;
+            }
+        }
+        
+        sum-=num;
+        return sum==num?true:false;
+    }
+}
