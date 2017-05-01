@@ -1,0 +1,28 @@
+public class Solution {
+    public int reverse(int x) {
+        int p=rev(x);
+        int q=rev(p);
+        
+        while(x!=q && x!=0){
+            x/=10;
+        }
+        
+        if(x==0){
+            return 0;
+        }
+        return p;
+    }
+
+    public int rev(int x){
+        int p=0,q=x;
+        
+        while(q!=0){
+            p*=10;
+            p+=q%10;
+            q/=10;
+        }
+        
+        
+        return p;
+    }
+}
