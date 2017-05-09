@@ -1,0 +1,38 @@
+public class Solution {
+    public boolean repeatedSubstringPattern(String s) {
+        char[] str=s.toCharArray();
+        int len=str.length;
+        
+        for(int i=1;i<=len/2;i++){
+            int size=len/i;
+            if(len%i==0){
+                boolean flag=true;
+                for(int j=0;j<size;j++){
+                if(!equals(str,0,j,i)){
+                    flag=false;
+                    break;
+                }
+            }
+            
+                if(flag){
+                    return true;
+                }
+            }
+            
+
+        }
+        
+        return false;
+        
+        
+    }
+    
+    public boolean equals(char[] str,int f,int s,int l){
+        for(int i=0;i<l;i++){
+            if(str[f*l+i]!=str[s*l+i]){
+                return false;
+            }
+        }
+        return true;
+    }
+}
